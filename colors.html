@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Colors</title>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', () => {
             // document.getElementById('red').onclick = function() {
             //     document.querySelector('h1').style.color = 'red';
             // };
@@ -13,12 +13,16 @@
             // document.getElementById('blue').onclick = function() {
             //     document.querySelector('h1').style.color = 'blue';
             // };
-
-            document.querySelectorAll('button').forEach(function(button) {
+            let heading = document.querySelector('h1');
+            document.querySelectorAll('button').forEach(button => {
                 button.onclick = function() {
-                  document.querySelector('h1').style.color = button.dataset.color;  
+                  heading.style.color = button.dataset.color;  
                 };
             });
+
+            document.querySelector('select').onchange = function() {
+                heading.style.color = this.value;
+            };
         });
     </script>
 </head>
@@ -26,5 +30,10 @@
     <h1>Hello in Colors!</h1>
     <button data-color="red">Red</button>
     <button data-color="blue">Blue</button>
+    <select style="width:100px;"id="color-select">
+        <option value="black">Black</option>
+        <option value="green">Green</option>
+        <option value="cyan">Cyan</option>
+    </select>
 </body>
 </html>

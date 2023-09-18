@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Currency</title>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            document.querySelector('#form1').onsubmit = () => {
+
+                fetch('https://api.exchangerate.host/latest/?base=USD')
+                .then(response => response.json())
+                .then(data => {
+                    const currency = document.querySelector('#currency').value.toUpperCase();
+                    const rate = data.rates[currency];
+                    if (rate !== undefined)
+                    {
+                        document.querySelector('h2').innerHTML = `USD to ${currency} is ${rate.toFixed(2)}`;
+                    }
+                    else
+                    {
+                        document.querySelector('h2').innerHTML = 'Invalid Currency';
+                    }
+                });
+                .catch(error) => {
+                    console.log("Error: ", error);
+                }
+
+                return false;
+            };
+           
+        });
+    </script>
+
+</head>
+<body>
+    <h1>USD to Others</h1>
+    <form id="form1">
+        <input type="text" name="currency" id="currency" autofocus autocomplete="off">
+        <button type="submit">Convert</button>
+    </form>
+    <h2></h2>
+</body>
+</html>

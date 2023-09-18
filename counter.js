@@ -1,13 +1,16 @@
-let counter = 0;
+if (!localStorage.getItem('counter'))
+{
+    localStorage.setItem('counter', 0);
+};
+
 function count() {
-    counter += 1;
+    let counter = localStorage.getItem('counter');
+    counter++;
     document.getElementById('counter').innerHTML = counter;
-    if (counter % 10 === 0)
-    {
-        alert(`${counter} is a multiple of 10!`);
-    }
-}
+    localStorage.setItem('counter', counter);
+};
 
 document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('#counter').innerHTML = localStorage.getItem('counter');
     document.getElementById('btn1').onclick = count;
 });
